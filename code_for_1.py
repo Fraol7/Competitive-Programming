@@ -1,5 +1,4 @@
 num, low, hi= map(int,input().split())
-
 List = []
 def code_41(num):
     if num <= 1:
