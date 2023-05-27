@@ -11,10 +11,7 @@ class Solution:
             List.append(curr.val)
             curr = curr.next
         n = len(List) - 1
-        ans = []
+        ans = 0
         for i in range(len(List)//2):
-            ans.append(List[i] + List[n-i])
-        ans.sort()
-        ans = ans[::-1]
-        return ans[0]
-
+            ans = max(ans, (List[i] + List[n-i]))
+        return ans
