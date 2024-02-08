@@ -9,7 +9,6 @@ class Solution:
                 refer[i] -= each
             else:
                 del refer[i]
-        print(refer, max_diff)
         if max_diff == 0 or max_diff == 1:
             return max_diff
         left, min_win = 0, float('inf')
