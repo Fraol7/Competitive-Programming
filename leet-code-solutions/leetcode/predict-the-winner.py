@@ -1,10 +1,12 @@
 class Solution:
     def predictTheWinner(self, nums: List[int]) -> bool:
-        def helper(nums, left, right):
-            if left > right:
-                return 0
-            if left == right:
-                return nums[left]
-            score = max(nums[left] + min(helper(nums, left + 2, right),helper(nums, left + 1, right - 1)),nums[right] + min(helper(nums, left, right - 2),helper(nums, left + 1, right - 1)))
-            return score
-        return helper(nums, 0, len(nums) - 1) >= sum(nums)/2
+        def helper(score, nums, turn):
+            if len(nums) == 1:
+                return score + nums[0] if turn else score - nums[0]
+            if turn:
+                return max(helper(score + nums[0], nums[1:], False),
+                           helper(score + nums[-1], nums[:len(nums)-1], False))
+            else:
+                return min(helper(score - nums[0], nums[1:], True),
+                           helper(score - nums[-1], nums[:len(nums)-1], True))
+        return helper(0, nums, True) >= 0
