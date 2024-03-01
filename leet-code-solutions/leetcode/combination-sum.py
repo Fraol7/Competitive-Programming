@@ -1,14 +1,14 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        self.result = []
-        def backtrack(combine, i):
-            if sum(combine) > target or len(candidates) <= i:
+        self.answer = []
+        def backtrack(candidates,combined):
+            if not candidates or sum(combined) > target:
                 return
-            if sum(combine) == target:
-                self.result.append(combine.copy()) 
+            if sum(combined) == target:
+                self.answer.append(combined.copy())
                 return
-            backtrack(combine+[candidates[i]], i)
-            backtrack(combine, i+1)
-        backtrack([], 0)
-        return self.result
+            for i in range(len(candidates)):
+                backtrack(candidates[i:],combined+[candidates[i]])
+        backtrack(candidates, [])
+        return self.answer
 
